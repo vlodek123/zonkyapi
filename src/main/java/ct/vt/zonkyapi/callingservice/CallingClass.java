@@ -22,7 +22,7 @@ public class CallingClass {
 
     private URL url;
     private HttpURLConnection conn;
-    private String bearer = "Bearer feb5c842-1837-487e-a280-dda1b5206626";
+    private String bearer = "Bearer 69364ffb-4fd8-4468-8f93-557277330914";
     private InputStreamReader in = null;
     private BufferedReader br = null;
 
