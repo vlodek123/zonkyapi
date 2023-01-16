@@ -25,15 +25,14 @@ public class CallingClass {
 
     private URL url;
     private HttpURLConnection conn;
-    private String bearer = "Bearer 864449ae-a854-42b7-ba73-d49cdabd4dc6";
+    private String bearer;
     private InputStreamReader in = null;
     private BufferedReader br = null;
 
 
     public List<ServiceLoan>  getZonkyLoans() throws Exception {
 
-            String bearer = getToken();
-
+            getToken();
 
             url = new URL("https://api.zonky.cz/loans/marketplace");
             conn = (HttpURLConnection) url.openConnection();
@@ -66,6 +65,39 @@ public class CallingClass {
         return loanList;
     }
 
+    public List<ServiceLoan>  getZonkyLoans(String bearer) throws Exception {
+
+        url = new URL("https://api.zonky.cz/loans/marketplace");
+        conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestProperty("Authorization", bearer);
+        conn.setRequestMethod("GET");
+        ZonkyResponseLoan[] zonkyResponse;
+
+        int status = conn.getResponseCode();
+        log.info("Get Zonky loans Http_SC: " + status );
+
+        if (status > 299) {
+            in = new InputStreamReader(conn.getErrorStream());
+            String content = getContent(in).toString().replace("\"","");
+            throw new ZonkyErrorResponseException(content);
+        } else {
+
+            in = new InputStreamReader(conn.getInputStream());
+            String content = getContent(in).toString();
+
+            ObjectMapper om = new ObjectMapper();
+            zonkyResponse = om.readValue(content, ZonkyResponseLoan[].class);
+
+        }
+        List<ServiceLoan> loanList = new ArrayList<>();
+        for (ZonkyResponseLoan item: zonkyResponse
+        ) {
+            loanList.add(new ServiceLoan(item.getId(), item.getInterestRate(), item.getAmount()));
+        }
+
+        return loanList;
+    }
+
     public StringBuffer getContent(InputStreamReader in) throws Exception{
 
         br = new BufferedReader(in);
@@ -82,7 +114,7 @@ public class CallingClass {
         return content;
     }
 
-    public String getToken() throws Exception {
+    public void getToken() throws Exception {
         String scope = "SCOPE_APP_BASIC_INFO SCOPE_INVESTMENT_READ SCOPE_INVESTMENT_WRITE SCOPE_NOTIFICATIONS_READ SCOPE_NOTIFICATIONS_WRITE";
         String state = "123456789";
         String clientId = "mujrobot";
@@ -127,13 +159,12 @@ public class CallingClass {
             content = getContent(in).toString();
 
         }
-        log.info(content);
+        log.info(content); //returns html page
 
-
-
-        return "Bearer 864449ae-a854-42b7-ba73-d49cdabd4dc6";
+        setBearer("Bearer 864449ae-a854-42b7-ba73-d49cdabd4dc6"); //hardcoded
     }
 
-
-
+    public void setBearer(String bearer) {
+        this.bearer = bearer;
+    }
 }
