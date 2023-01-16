@@ -22,22 +22,49 @@ public class ZonkyAPServiceiImpl implements ZonkyApiService {
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
-    public String getAverageRate() throws Exception {
+    public String getAverageRateV1() throws Exception {
         this.loanList = callingService.getZonkyLoans();
         double averageValue = getAverageValue(2);
         return String.format("Průměrný úrok: %s %c posledních %d úvěrů.", df.format(averageValue*100), '%', this.loanList.size() );
     }
 
     @Override
-    public String getAverageLoan() throws Exception{
+    public String getAverageLoanV1() throws Exception{
         this.loanList = callingService.getZonkyLoans();
         double averageValue = getAverageValue(3);
         return String.format("Průměrný úver: %s Kč z posledních %d úvěrů.", df.format(averageValue), this.loanList.size() );
     }
 
     @Override
-    public List<Loan> getLoans() throws Exception {
+    public List<Loan> getLoansV1() throws Exception {
         this.loanList = callingService.getZonkyLoans();
+
+        ModelMapper modelMapper = new ModelMapper();
+        List<Loan> loans = loanList
+                .stream()
+                .map(serviceLoan -> modelMapper.map(serviceLoan, Loan.class))
+                .collect(Collectors.toList());
+
+        return loans;
+    }
+
+    @Override
+    public String getAverageRateV2(String bearer) throws Exception {
+        this.loanList = callingService.getZonkyLoans(bearer);
+        double averageValue = getAverageValue(2);
+        return String.format("Průměrný úrok: %s %c posledních %d úvěrů.", df.format(averageValue*100), '%', this.loanList.size() );
+    }
+
+    @Override
+    public String getAverageLoanV2(String bearer) throws Exception {
+        this.loanList = callingService.getZonkyLoans(bearer);
+        double averageValue = getAverageValue(3);
+        return String.format("Průměrný úver: %s Kč z posledních %d úvěrů.", df.format(averageValue), this.loanList.size() );
+    }
+
+    @Override
+    public List<Loan> getLoansV2(String bearer) throws Exception {
+        this.loanList = callingService.getZonkyLoans(bearer);
 
         ModelMapper modelMapper = new ModelMapper();
         List<Loan> loans = loanList

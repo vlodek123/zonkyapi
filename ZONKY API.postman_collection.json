@@ -1,0 +1,227 @@
+{
+	"info": {
+		"_postman_id": "bb678a8b-3bc9-4816-bb40-323ec5379ac9",
+		"name": "ZONKY API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10877400"
+	},
+	"item": [
+		{
+			"name": "GET averageRate",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/zonkyapi/v1/averageRate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"zonkyapi",
+						"v1",
+						"averageRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET LastLoans",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/zonkyapi/v1/lastloans",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"zonkyapi",
+						"v1",
+						"lastloans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET averageLoan",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/zonkyapi/v1/averageLoan",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"zonkyapi",
+						"v1",
+						"averageLoan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET averageRateV2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/zonkyapi/v2/averageRate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"zonkyapi",
+						"v2",
+						"averageRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET averageLoanV2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/zonkyapi/v2/averageLoan",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"zonkyapi",
+						"v2",
+						"averageLoan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET lastLoansV2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/zonkyapi/v2/lastloans",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"zonkyapi",
+						"v2",
+						"lastloans"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "redirect_uri",
+				"value": "https://app.zonky.cz/api/oauth/code",
+				"type": "string"
+			},
+			{
+				"key": "state",
+				"value": "123456",
+				"type": "string"
+			},
+			{
+				"key": "scope",
+				"value": "SCOPE_APP_BASIC_INFO SCOPE_INVESTMENT_READ SCOPE_INVESTMENT_WRITE SCOPE_NOTIFICATIONS_READ SCOPE_NOTIFICATIONS_WRITE",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "{{clientSecret}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{clientId}}",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "https://api.zonky.cz/oauth/token",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "https://api.zonky.cz/oauth/authorize",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "Zonky API token",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "clientId",
+			"value": "mujrobot",
+			"type": "string"
+		},
+		{
+			"key": "clientSecret",
+			"value": "mujrobot",
+			"type": "string"
+		}
+	]
+}
